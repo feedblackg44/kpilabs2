@@ -27,20 +27,17 @@ namespace Prog1
         }
         static bool moreThan(int num1, int num2)
         {
-            bool highestBit = true;                     // decide if it's a highest bit or not
-            int iter = 1 << (sizeof(int) * 8 - 2);      // iterator to cross over all bits
+            int iter = 1 << (sizeof(int) * 8 - 1);       // iterator to cross over all bits
+            if (Convert.ToBoolean(num1 & iter ^ num2 & iter))
+                return Convert.ToBoolean(num2 & iter);
 
+            iter = 1 << (sizeof(int) * 8 - 2);
             while (Convert.ToBoolean(iter))
             {
                 if (Convert.ToBoolean(num1 & iter ^ num2 & iter))
                 {
-                    if (highestBit)
-                        return Convert.ToBoolean(num2 & iter);
-                    else
-                        return Convert.ToBoolean(num1 & iter);
+                    return Convert.ToBoolean(num1 & iter);
                 }
-                else
-                    highestBit = false;
                 iter >>= 1;
             }
 
