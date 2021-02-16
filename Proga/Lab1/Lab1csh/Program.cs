@@ -6,7 +6,7 @@ namespace Prog1
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Program by: Plostak Illia IS-02\n");
+            Console.WriteLine("Lab #1 by: Plostak Illia IS-02\n");
             Console.WriteLine("Print 2 numbers to compare. First number will be decremented by 1:");
 
             int a = Convert.ToInt32(Console.ReadLine());            // 1 number to compare

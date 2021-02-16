@@ -8,7 +8,7 @@ int main()
     int a, b;           // numbers to compare
     string output;      // output string which depends on compare of numbers
 
-    cout << "Program by: Plostak Illia IS-02\n\n";
+    cout << "Lab #1 by: Plostak Illia IS-02\n\n";
     cout << "Print 2 numbers to compare. First number will be decremented by 1:" << endl;
     cin >> a >> b;
 
