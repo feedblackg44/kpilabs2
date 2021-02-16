@@ -26,32 +26,35 @@ namespace Prog1
         }
         static bool moreThan(int num1, int num2)
         {
-            bool output = false;            // output bool variable which depends on compare of numbers
-            bool highestBit = true;         // decide if it's a highest bit or not
-            for (int i = sizeof(int) * 8 - 1; i >= 0; i--)
+            bool highestBit = true;                     // decide if it's a highest bit or not
+            int iter = 1 << (sizeof(int) * 8 - 2);      // iterator to cross over all bits
+
+            while (Convert.ToBoolean(iter))
             {
-                if (Convert.ToBoolean(num1 >> i ^ num2 >> i))
+                if (Convert.ToBoolean(num1 & iter ^ num2 & iter))
                 {
                     if (highestBit)
-                        output = Convert.ToBoolean(num2 & (1 << i));
+                        return Convert.ToBoolean(num2 & iter);
                     else
-                        output = Convert.ToBoolean(num1 & (1 << i));
-                    break;
+                        return Convert.ToBoolean(num1 & iter);
                 }
                 else
                     highestBit = false;
+                iter >>= 1;
             }
 
-            return output;
+            return false;
         }
         static void dekrement(ref int num)
         {
-            for (int i = 0; i < sizeof(int) * 8; i++)
+            int iter = 1;           // iterator to cross over all bits
+            while (Convert.ToBoolean(iter))
             {
-                num = num ^ (1 << i);
-                if (Convert.ToBoolean(num & (1 << i)))
-                    continue;
-                break;
+                num ^= iter;
+                if (Convert.ToBoolean(num & iter))
+                    iter <<= 1;
+                else
+                    iter = 0;
             }
         }
     }

@@ -20,7 +20,7 @@ int main()
 
     cout << output << endl;
     cout << "a-- = " << a << endl;
-    
+
     system("pause");
     return 0;
 }

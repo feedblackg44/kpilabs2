@@ -2,33 +2,35 @@
 
 bool moreThan(int num1, int num2)
 {
-    bool output = false;            // output bool variable which depends on compare of numbers
-    bool highestBit = true;         // decide if it's a highest bit or not
+    bool highestBit = true;                     // decide if it's a highest bit or not
+    int iter = 1 << (sizeof(int) * 8 - 2);      // iterator to cross over all bits
 
-    for (int i = sizeof(int)*8 - 1; i >= 0; i--)
+    while (iter)
     {
-        if (num1 >> i ^ num2 >> i)
+        if (num1 & iter ^ num2 & iter)
         {
             if (highestBit)
-                output = num2 & (1 << i);
+                return num2 & iter;
             else
-                output = num1 & (1 << i);
-            break;
+                return num1 & iter;
         }
         else
             highestBit = false;
+        iter >>= 1;
     }
 
-    return output;
+    return false;
 }
 
 void dekrement(int& num)
 {
-    for (int i = 0; i < sizeof(int) * 8; i++)
+    int iter = 1;           // iterator to cross over all bits
+    while (iter)
     {
-        num = num ^ (1 << i);
-        if (num & (1 << i))
-            continue;
-        break;
+        num ^= iter;
+        if (num & iter)
+            iter <<= 1;
+        else
+            iter = 0;
     }
 }
