@@ -28,7 +28,7 @@ namespace Prog1
         {
             bool output = false;            // output bool variable which depends on compare of numbers
             bool highestBit = true;         // decide if it's a highest bit or not
-            for (int i = 31; i >= 0; i--)
+            for (int i = sizeof(int) * 8 - 1; i >= 0; i--)
             {
                 if (Convert.ToBoolean(num1 >> i ^ num2 >> i))
                 {
@@ -46,7 +46,7 @@ namespace Prog1
         }
         static void dekrement(ref int num)
         {
-            for (int i = 0; i < 32; i++)
+            for (int i = 0; i < sizeof(int) * 8; i++)
             {
                 num = num ^ (1 << i);
                 if (Convert.ToBoolean(num & (1 << i)))
