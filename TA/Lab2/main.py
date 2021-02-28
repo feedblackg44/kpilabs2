@@ -4,11 +4,11 @@ import random
 import func
 import plot_func as pf
 
-sizes = [10, 100, 1000, 10000]
+sizes = [10]
 types = ["random", "best", "worst"]
-data_plot = {'random': {'bubble':{}, 'insertion':{}, 'bubble_impr':{}}, 
-             'best':   {'bubble':{}, 'insertion':{}, 'bubble_impr':{}},
-             'worst':  {'bubble':{}, 'insertion':{}, 'bubble_impr':{}}}
+data_plot = {'random': {'bubble':{}, 'insertion':{}, 'bubble_impr':{}, 'self_insertion':{}},
+             'best':   {'bubble':{}, 'insertion':{}, 'bubble_impr':{}, 'self_insertion':{}},
+             'worst':  {'bubble':{}, 'insertion':{}, 'bubble_impr':{}, 'self_insertion':{}}}
 
 for n in sizes:
     print("\nDATA SIZE: ", n)
@@ -30,6 +30,11 @@ for n in sizes:
         insertion_op_count = func.insertion_sort(data_insertion)
         print("\tInsertion sort operation count:", int(insertion_op_count))
         data_plot[gen_type]['insertion'][n] = insertion_op_count
+
+        data_insertion = np.copy(data)
+        self_insertion_op_count = func.self_insertion_sort(data_insertion)
+        print("\tSelf insertion sort operation count:", int(self_insertion_op_count))
+        data_plot[gen_type]['self_insertion'][n] = self_insertion_op_count
 
 for i in data_plot:
     pf.plot_data(data_plot, logarithmic=True, oneplot=False)

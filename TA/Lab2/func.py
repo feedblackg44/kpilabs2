@@ -48,4 +48,17 @@ def insertion_sort(data):
         if i >= 0 and done == False:        # Если сравнение не произошло увеличиваем каунтер на одно сравнение
             counter += 1
         data[i + 1] = key                   # Переставляем ключ на нужную позицию
+    print("\t", data)
+    return counter
+
+def self_insertion_sort(data):
+    counter = 0
+    for i in range (0, len(data)):
+        for j in range (i, 0, -1):
+            counter += 1
+            if data[j] < data[j-1]:
+                data[j], data[j - 1] = data[j-1], data[j]
+            else:
+                break
+    print("\t", data)
     return counter
