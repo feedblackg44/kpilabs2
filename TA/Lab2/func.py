@@ -37,28 +37,27 @@ def bubble_impr_sort(data):
 def insertion_sort(data):
     counter = 0
     for j in range(1, len(data)):           # Проходим все элементы массива, кроме нулевого
-        done = False                        # Переменная для проверки сравнения
+        shift = False                       # Переменная для проверки сдвига
         key = data[j]                       # Ключ - текущий элемент
         i = j - 1                           # Индекс предыдущего элемента
         while i >= 0 and data[i] > key:     # Перебираем элементы от ключа в начало, пока ключ меньше текущего элемента
             data[i + 1] = data[i]           # Присваиваем следующему элементу значение текущего
             i -= 1
             counter += 1
-            done = True
-        if i >= 0 and done == False:        # Если сравнение не произошло увеличиваем каунтер на одно сравнение
+            shift = True
+        if i >= 0:                          # Если не прошли весь массив увеличиваем каунтер на одно сравнение
             counter += 1
-        data[i + 1] = key                   # Переставляем ключ на нужную позицию
-    print("\t", data)
+        if shift:                           # Если были сдвиги
+            data[i + 1] = key               # Переставляем ключ на нужную позицию
     return counter
 
 def self_insertion_sort(data):
     counter = 0
-    for i in range (0, len(data)):
+    for i in range (1, len(data)):
         for j in range (i, 0, -1):
             counter += 1
             if data[j] < data[j-1]:
                 data[j], data[j - 1] = data[j-1], data[j]
             else:
                 break
-    print("\t", data)
     return counter

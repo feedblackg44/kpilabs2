@@ -31,10 +31,9 @@ for n in sizes:
         print("\tInsertion sort operation count:", int(insertion_op_count))
         data_plot[gen_type]['insertion'][n] = insertion_op_count
 
-        data_insertion = np.copy(data)
-        self_insertion_op_count = func.self_insertion_sort(data_insertion)
+        data_self_insertion = np.copy(data)
+        self_insertion_op_count = func.self_insertion_sort(data_self_insertion)
         print("\tSelf insertion sort operation count:", int(self_insertion_op_count))
         data_plot[gen_type]['self_insertion'][n] = self_insertion_op_count
 
-for i in data_plot:
-    pf.plot_data(data_plot, logarithmic=True, oneplot=False)
+pf.plot_data(data_plot, logarithmic=True, oneplot=False)
