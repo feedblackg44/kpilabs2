@@ -1,6 +1,5 @@
 import numpy as np
 import random
-#from plot_data import plot_data
 
 import func
 import plot_func as pf

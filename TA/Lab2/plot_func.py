@@ -3,7 +3,6 @@ from pylab import figure, show
 from math import log
 
 def plot_data(data, logarithmic=False, oneplot=False):
-#    print data
     fig = figure(1)
     num = len(data)
     colors = ['r','b','g']
