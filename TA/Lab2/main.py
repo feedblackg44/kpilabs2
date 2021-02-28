@@ -31,5 +31,4 @@ for n in sizes:
         print("\tInsertion sort operation count:", int(insertion_op_count))
         data_plot[gen_type]['insertion'][n] = insertion_op_count
 
-for i in data_plot:
-    pf.plot_data(data_plot, logarithmic=True, oneplot=False)
+pf.plot_data(data_plot, logarithmic=True, oneplot=False)
