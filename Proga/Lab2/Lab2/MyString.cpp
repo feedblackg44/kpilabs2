@@ -134,7 +134,7 @@ std::ostream& operator<< (std::ostream& os, const MyString& strIn)
 
 char MyString::operator[] (const int index)
 {
-    return str[index];
+    return this->str[index];
 }
 
 MyString& MyString::operator+= (char symbol)
