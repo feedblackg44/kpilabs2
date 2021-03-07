@@ -35,7 +35,7 @@ namespace MyClasses
 
         public void AddString(MyString strIn, int strNum)
         {
-            AddEmptySpace();
+            this.AddEmptySpace();
             int sNum = this.strings_num;
             if (strNum > sNum)
                 strNum = sNum;
@@ -63,7 +63,7 @@ namespace MyClasses
                         this.text[i].DeepCopy(this.text[i + 1]);
                 }
             }
-            RemoveEmptySpace();
+            this.RemoveEmptySpace();
         }
 
         public void Clear()

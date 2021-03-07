@@ -46,5 +46,5 @@ private:
     char* str;
     size_t length;
 
-    void ExtractFisrtWordOfString(MyString& strIn);
+    int ExtractFisrtWordOfString(MyString& strIn);
 };

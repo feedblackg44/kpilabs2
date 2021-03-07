@@ -127,15 +127,17 @@ namespace MyClasses
 
             while (!strTemp.IsEmpty())
             {
-                curWord.ExtractFisrtWordOfString(strTemp);
+                int spaces = curWord.ExtractFisrtWordOfString(strTemp);
 
                 if(!System.Char.IsUpper(curWord[0]))
                     curWord[0] = System.Char.ToUpper(curWord[0]);
 
                 strOut += curWord;
-                strOut += ' ';
+                for (int i = 0; i < spaces; i++)
+                {
+                    strOut += ' ';
+                }
             }
-            strOut.length--;
             strOut.str[strOut.length] = '\0';
 
             return strOut;
@@ -197,48 +199,31 @@ namespace MyClasses
             {
                 strIn1 += strIn2[i];
             }
-            
-            /*int length1 = strIn1.length;
-            char[] temp = new char[length1];
-            for (int i = 0; i < length1; i++)
-            {
-                temp[i] = strIn1.str[i];
-            }
-            strIn1.str = new char[length1 + strIn1.length + 1];
-            for (int i = 0; i < length1; i++)
-            {
-                strIn1.str[i] = temp[i];
-            }
-            for (int i = 0; i < strIn1.length; i++)
-            {
-                strIn1.str[length1 + i] = strIn1.str[i];
-            }
-            strIn1.str[strIn1.length + strIn1.length] = '\0';
-            strIn1.length += strIn1.length;*/
 
             return strIn1;
         }
 
-        /*public static MyString operator = (MyString strIn1, MyString strIn2)
-        {
-            strIn1.DeepCopy(strIn2);
-
-            return strIn1;
-        }
-
-        public MyString operator = (in char[]);
-        */
-        private void ExtractFisrtWordOfString(MyString strIn)
+        private int ExtractFisrtWordOfString(MyString strIn)
         {
             MyString strTemp = new MyString(),
                      outWord = new MyString();
 
             bool found = false;
+            bool countSpaces = true;
+            int counter = 0;
             for (int i = 0; i < strIn.length; i++)
             {
                 if (found)
                 {
                     strTemp += strIn[i];
+                    if (strIn[i] == ' ' && countSpaces)
+                    {
+                        counter++;
+                    }
+                    else
+                    {
+                        countSpaces = false;
+                    }
                 }
                 else if ((strIn[i]) != ' ')
                 {
@@ -246,11 +231,14 @@ namespace MyClasses
                 }
                 else if (i > 0 && strIn[i - 1] != ' ')
                 {
+                    counter++;
                     found = true;
                 }
             }
             strIn.DeepCopy(strTemp);
             this.DeepCopy(outWord);
+
+            return counter;
         }
 
         private int strlen(in char[] strIn)

@@ -29,7 +29,7 @@ MyText::MyText(const MyText& textIn)
 
 void MyText::AddString(MyString& strIn, size_t strNum)
 {   
-    AddEmptySpace();
+    this->AddEmptySpace();
     size_t sNum = this->strings_num;
     if (strNum > sNum)
         strNum = sNum;
@@ -57,7 +57,7 @@ void MyText::RemoveString(size_t strNum)
                 this->text[i] = this->text[i + 1];
         }
     }
-    RemoveEmptySpace();
+    this->RemoveEmptySpace();
 }
 
 size_t MyText::GetWordsNum()
