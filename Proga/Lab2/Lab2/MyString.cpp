@@ -88,9 +88,15 @@ MyString& MyString::UpperCase()
 
     strTemp.DeepCopy(*this);
 
+    size_t spacesBefore = removeFirstSpaces(strTemp);
+    for (size_t i = 0; i < spacesBefore; i++)
+    {
+        (*strOut) += ' ';
+    }
+
     while (!strTemp.IsEmpty())
     {
-        int spaces = curWord.ExtractFisrtWordOfString(strTemp);
+        size_t spaces = curWord.ExtractFisrtWordOfString(strTemp);
 
         if (int(curWord[0]) >= 97 && int(curWord[0]) <= 122)
             curWord.str[0] = char(int(curWord.str[0]) - 32);
@@ -98,7 +104,7 @@ MyString& MyString::UpperCase()
             curWord.str[0] = char(int(curWord.str[0]) - 32);
 
         (*strOut) += curWord;
-        for (int i = 0; i < spaces; i++)
+        for (size_t i = 0; i < spaces; i++)
         {
             (*strOut) += ' ';
         }
@@ -207,14 +213,14 @@ MyString::~MyString()
 
 // Private //
 
-int MyString::ExtractFisrtWordOfString(MyString& strIn)
+size_t MyString::ExtractFisrtWordOfString(MyString& strIn)
 {
     MyString strTemp,
              outWord;
 
     bool found = false;
     bool countSpaces = true;
-    int counter = 0;
+    size_t counter = 0;
     for (size_t i = 0; i < strIn.length; i++)
     {
         if (found)
@@ -241,6 +247,32 @@ int MyString::ExtractFisrtWordOfString(MyString& strIn)
     }
     strIn.DeepCopy(strTemp);
     (*this).DeepCopy(outWord);
+
+    return counter;
+}
+
+size_t MyString::removeFirstSpaces(MyString strIn)
+{
+    MyString strOut;
+
+    size_t counter = 0;
+    bool found = false;
+    for (size_t i = 0; i < strIn.length; i++)
+    {
+        if (found)
+        {
+            strOut += strIn[i];
+        }
+        else if ((strIn[i]) == ' ')
+        {
+            counter++;
+            if (i < strIn.length - 1 && strIn[i + 1] != ' ')
+            {
+                found = true;
+            }
+        }
+    }
+    strIn.DeepCopy(strOut);
 
     return counter;
 }

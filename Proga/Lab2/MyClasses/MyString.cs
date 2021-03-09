@@ -125,6 +125,12 @@ namespace MyClasses
 
             strTemp.DeepCopy(this);
 
+            int spacesBefore = removeFirstSpaces(strTemp);
+            for (int i = 0; i < spacesBefore; i++)
+            {
+                strOut += ' ';
+            }
+
             while (!strTemp.IsEmpty())
             {
                 int spaces = curWord.ExtractFisrtWordOfString(strTemp);
@@ -237,6 +243,32 @@ namespace MyClasses
             }
             strIn.DeepCopy(strTemp);
             this.DeepCopy(outWord);
+
+            return counter;
+        }
+
+        private int removeFirstSpaces(MyString strIn)
+        {
+            MyString strOut = new MyString();
+
+            int counter = 0;
+            bool found = false;
+            for (int i = 0; i < strIn.length; i++)
+            {
+                if (found)
+                {
+                    strOut += strIn[i];
+                }
+                else if ((strIn[i]) == ' ')
+                {
+                    counter++;
+                    if (i < strIn.length - 1 && strIn[i + 1] != ' ')
+                    {
+                        found = true;
+                    }
+                }
+            }
+            strIn.DeepCopy(strOut);
 
             return counter;
         }

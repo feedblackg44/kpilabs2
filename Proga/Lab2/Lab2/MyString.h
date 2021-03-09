@@ -46,5 +46,7 @@ private:
     char* str;
     size_t length;
 
-    int ExtractFisrtWordOfString(MyString& strIn);
+    size_t ExtractFisrtWordOfString(MyString& strIn);
+
+    size_t removeFirstSpaces(MyString strIn);
 };
