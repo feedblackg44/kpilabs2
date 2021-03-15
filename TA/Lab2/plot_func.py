@@ -51,8 +51,8 @@ def plot_data(data, logarithmic=False, oneplot=False):
                     xs = [log(x,10) for x in od_points.keys()]
                     ys = [log(y,10) for y in od_points.values()]
                 else:
-                    xs = od_points.keys()
-                    ys = od_points.values()
+                    xs = list(od_points.keys())
+                    ys = list(od_points.values())
                 xs.insert(0,0)
                 x_max = max(x_max, max(xs))
                 ys.insert(0,0)
