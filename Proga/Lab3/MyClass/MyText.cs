@@ -4,7 +4,7 @@ namespace MyClass
 {
     public class MyText
     {
-        public char[][] Array { get; private set; }
+        private char[][] Array;
         private int numOfConsLetters;
         public int NumOfConsLetters
         {
