@@ -8,6 +8,10 @@ void matrix4Init(float** M);
 
 void vector4Init(float* V);
 
+void matrix5Init(float** M);
+
+void vector5Init(float* V);
+
 void fillInSeq(int* Vector, int size);
 
 void fillRandom(float** Matrix, int size);
