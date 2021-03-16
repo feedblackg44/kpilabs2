@@ -98,6 +98,7 @@ void zeidelMethodSolve(double** matrix, double* B, double* X, int size)
         {
             X[i] = -sumOfMatrixElements(matrix, X, 0, i, i) - sumOfMatrixElements(matrix, tempX, i + 1, size, i) + B[i] / matrix[i][i];
         }
+        print(X, size);
     } while (maxInArrays(X, tempX, size) >= e);
 }
 
