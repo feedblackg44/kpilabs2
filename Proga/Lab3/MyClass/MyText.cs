@@ -93,10 +93,10 @@ namespace MyClass
         }
         private static bool MatchPattern(char symbol)
         {
-            string symbols = "qwrtpsdfghjklzxcvbnm";
+            string symbols = "bcdfghjklmnpqstvxzrw";
             for (int i = 0; i < symbols.Length; i++)
             {
-                if (symbol == symbols[i])
+                if (System.Char.ToLower(symbol) == symbols[i])
                 {
                     return true;
                 }
