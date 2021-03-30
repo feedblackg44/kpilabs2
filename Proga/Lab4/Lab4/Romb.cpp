@@ -87,28 +87,28 @@ std::ostream& operator<<(std::ostream& os, const Romb& rombikOut)
     return os;
 }
 
-Romb& operator*(const Romb& rombik, double multip)
+Romb& Romb::operator*(double multip)
 {
     Romb* rombikOut = new Romb();
     for (size_t i = 0; i < 4; i++)
     {
         for (size_t j = 0; j < 2; j++)
         {
-            (*rombikOut).coords[i][j] = multip * rombik.coords[i][j];
+            (*rombikOut).coords[i][j] = multip * this->coords[i][j];
         }
     }
     (*rombikOut).side = rombikOut->GetVectorDistance((*rombikOut).coords[0], (*rombikOut).coords[1]);
     return *rombikOut;
 }
 
-Romb& operator-(const Romb& rombik1, const Romb& rombik2)
+Romb& Romb::operator-(const Romb& rombik)
 {
     Romb* rombikOut = new Romb();
     for (size_t i = 0; i < 4; i++)
     {
         for (size_t j = 0; j < 2; j++)
         {
-            (*rombikOut).coords[i][j] = rombik1.coords[i][j] - rombik2.coords[i][j];
+            (*rombikOut).coords[i][j] = this->coords[i][j] - rombik.coords[i][j];
         }
     }
     (*rombikOut).side = rombikOut->GetVectorDistance((*rombikOut).coords[0], (*rombikOut).coords[1]);

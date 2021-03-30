@@ -18,9 +18,9 @@ public:
 
     friend std::ostream& operator<<(std::ostream&, const Romb&);
     
-    friend Romb& operator*(const Romb&, double);
+    Romb& operator*(double);
     
-    friend Romb& operator-(const Romb&, const Romb&);
+    Romb& operator-(const Romb&);
 
 private:
     double coords[4][2];
