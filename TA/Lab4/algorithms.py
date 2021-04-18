@@ -1,25 +1,26 @@
 import math
 
-def Partition(A, p, r):
-    x = A[r]
-    i = p - 1
-    counter = 0
-    for j in range(p, r):
-        counter += 1
-        if A[j] <= x:
-            i += 1
-            A[i], A[j] = A[j], A[i]
-    A[i + 1], A[r] = A[r], A[i + 1]
-    return i + 1, counter
-
-def QuickSort(A, p, r):
-    counter = 0
-    if p < r:
-        q, temp_counter = Partition(A, p, r)
-        counter += temp_counter
-        counter += QuickSort(A, p, q-1)
-        counter += QuickSort(A, q+1, r)
-    return counter
+def Partition(A, p, r):                                    # функция разделения подмассива пополам
+    x = A[r]                                               # выбираем опорный элемент (pivot)
+    i = p                                                  # инициализируем итератор для левой части подмасива
+    counter = 0                                            # инициализируем текущий счётчик сравнений
+    for j in range(p, r):                                  # от начала подмасива до конца, кроме последнего, то есть опорного, элемента
+        counter += 1                                       # увеличиваем каунтер на 1 перед сравнением
+        if A[j] <= x:                                      # если текущий элемент меньше ключевого
+            A[i], A[j] = A[j], A[i]                        # отправляем его в левую часть подмасива на i-тое место
+            i += 1                                         # увиличиваем итератор левой части
+    A[i], A[r] = A[r], A[i]                                # ставим опорный элемент в начало правой части как разделяющий
+                                                           # между правой (большей) и левой (меньшей) частями
+    return i, counter                                      # возвращаем индекс опорного элемента и текущее количество сравнений
+                                                           
+def QuickSort(A, p, r):                                    # функция быстрой сортировки
+    counter = 0                                            # инициализируем текущий счётчик сравнений
+    if p < r:                                              # если индекс конца больше индекса начала
+        q, temp_counter = Partition(A, p, r)               # делим подмасив пополам функцией Partition
+        counter += temp_counter                            # прибавляем количество сравнений на текущем этапе
+        counter += QuickSort(A, p, q-1)                    # рекурсивно вызываем быструю сортировку для левой части подмасива
+        counter += QuickSort(A, q+1, r)                    # рекурсивно вызываем быструю сортировку для правой части подмасива
+    return counter                                         # возвращаем текущее количество сравнений
 
 def GetMedian(a, b, c):
     if a > b:
@@ -37,37 +38,39 @@ def GetMedian(a, b, c):
         else:
             return c
 
-def MedPartition(A, p, r):
-    q = math.floor((p+r)/2)
-    median = GetMedian(A[p], A[q], A[r])
-    medIndex = p
-    if median == A[q]:
-        medIndex = q
-    elif median == A[r]:
-        medIndex = r
-    A[r], A[medIndex] = A[medIndex], A[r]
-    x = A[r]
-    i = p - 1
-    counter = 0
-    for j in range(p, r):
-        counter += 1
-        if A[j] <= x:
-            i += 1
-            A[i], A[j] = A[j], A[i]
-    A[i + 1], A[r] = A[r], A[i + 1]
-    return i + 1, counter
+def MedPartition(A, p, r):                                 # функция разделения подмассива пополам
+    q = math.floor((p+r)/2)                                # индекс элемента посередине
+    median = GetMedian(A[p], A[q], A[r])                   # находим медиану из трёх элементов: последнего, первого и того что посередине
+    medIndex = p                                           # находим индекс медианы
+    if median == A[q]:                                     # ...
+        medIndex = q                                       # ...
+    elif median == A[r]:                                   # ...
+        medIndex = r                                       # ...
+    A[r], A[medIndex] = A[medIndex], A[r]                  # перемещаем медиану на последнее место, а последний элемент - на место медианы
+                                                           # затем выполняем обычный Partition
+    x = A[r]                                               # выбираем опорный элемент (pivot)                                                                                     
+    i = p                                                  # инициализируем итератор для левой части подмасива                             
+    counter = 0                                            # инициализируем текущий счётчик сравнений                                      
+    for j in range(p, r):                                  # от начала подмасива до конца, кроме последнего, то есть опорного, элемента    
+        counter += 1                                       # увеличиваем каунтер на 1 перед сравнением                                     
+        if A[j] <= x:                                      # если текущий элемент меньше ключевого                                         
+            A[i], A[j] = A[j], A[i]                        # отправляем его в левую часть подмасива на i-тое место                         
+            i += 1                                         # увиличиваем итератор левой части                                              
+    A[i], A[r] = A[r], A[i]                                # ставим опорный элемент в начало правой части как разделяющий                  
+                                                           # между правой (большей) и левой (меньшей) частями                              
+    return i, counter                                      # возвращаем индекс опорного элемента и текущее количество сравнений    
 
-def MedQuickSort(A, p, r):
-    counter = 0
-    if p < r:
-        if r - p > 2:
-            q, temp_counter = MedPartition(A, p, r)
-            counter += temp_counter
-            counter += MedQuickSort(A, p, q - 1)
-            counter += MedQuickSort(A, q + 1, r)
-        else:
-            q, temp_counter = Partition(A, p, r)
-            counter += temp_counter
-            counter += MedQuickSort(A, p, q - 1)
-            counter += MedQuickSort(A, q + 1, r)
-    return counter
+def MedQuickSort(A, p, r):                                 # функция быстрой сортировки              
+    counter = 0                                            # инициализируем текущий счётчик сравнений
+    if p < r:                                              # если индекс конца больше индекса начала 
+        if r - p >= 3:                                     # если подмасив длиной 3 или больше
+            q, temp_counter = MedPartition(A, p, r)        # делим подмасив пополам функцией MidPartition с использованием медианы
+            counter += temp_counter                        # прибавляем количество сравнений на текущем этапе
+            counter += MedQuickSort(A, p, q - 1)           # рекурсивно вызываем быструю сортировку для левой части подмасива
+            counter += MedQuickSort(A, q + 1, r)           # рекурсивно вызываем быструю сортировку для правой части подмасива
+        else:                                              # иначе
+            q, temp_counter = Partition(A, p, r)           # делим подмасив пополам обычной функцией Partition
+            counter += temp_counter                        # прибавляем количество сравнений на текущем этапе                 
+            counter += MedQuickSort(A, p, q - 1)           # рекурсивно вызываем быструю сортировку для левой части подмасива 
+            counter += MedQuickSort(A, q + 1, r)           # рекурсивно вызываем быструю сортировку для правой части подмасива
+    return counter                                         # возвращаем текущее количество сравнений
