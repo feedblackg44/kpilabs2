@@ -17,7 +17,7 @@ double Expression::Calculate()
     if (x < 0)
         throw std::exception("Expression under the square root must be more or equal to 0!");
     double z = sqrt(x) + _a / _b;
-    if (z < 0)
+    if (z == 0)
         throw std::exception("Can't divide by 0!");
     
     double result = ( 1 + _a - _b/2 ) / z;
