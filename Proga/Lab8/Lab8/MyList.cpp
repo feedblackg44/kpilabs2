@@ -85,11 +85,11 @@ long MyList::CountAverageLower()
 
 MyList::~MyList()
 {
-    while (_tail)
+    while (_head)
     {
-        _head = _tail->next;
-        delete _tail;
-        _tail = _head;
+        _tail = _head->next;
+        delete _head;
+        _head = _tail;
     }
 }
 
