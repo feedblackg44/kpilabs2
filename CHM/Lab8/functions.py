@@ -34,19 +34,28 @@ def Adams(func, y0, a, b, h0):
     arrX, arrY = RungeKutta(func, y0, a, a+h*3, h)
     i = 3
     while arrX[i] <= b:
-        y_ex = arrY[i] + (h/24)*(55*func(arrX[i], arrY[i]) -
-                                 59*func(arrX[i-1], arrY[i-1]) +
-                                 37*func(arrX[i-2], arrY[i-2]) -
-                                 9*func(arrX[i-3], arrY[i-3]))
-        y_cor = arrY[i] + (h/24)*(9*func(arrX[i]+h, y_ex) +
-                                  19*func(arrX[i], arrY[i]) -
-                                  5*func(arrX[i-1], arrY[i-1]) +
-                                  func(arrX[i-2], arrY[i-2]))
+        y_ex = arrY[i] + (h / 24) * (55 * func(arrX[i], arrY[i]) -
+                                     59 * func(arrX[i - 1], arrY[i - 1]) +
+                                     37 * func(arrX[i - 2], arrY[i - 2]) -
+                                     9 * func(arrX[i - 3], arrY[i - 3]))
+        y_cor = arrY[i] + (h / 24) * (9 * func(arrX[i] + h, y_ex) +
+                                      19 * func(arrX[i], arrY[i]) -
+                                      5 * func(arrX[i - 1], arrY[i - 1]) +
+                                      func(arrX[i - 2], arrY[i - 2]))
+        while abs(y_cor - y_ex) > 0.04:
+            h /= 2
+            y_ex = arrY[i] + (h/24)*(55*func(arrX[i], arrY[i]) -
+                                     59*func(arrX[i-1], arrY[i-1]) +
+                                     37*func(arrX[i-2], arrY[i-2]) -
+                                     9*func(arrX[i-3], arrY[i-3]))
+            y_cor = arrY[i] + (h/24)*(9*func(arrX[i]+h, y_ex) +
+                                      19*func(arrX[i], arrY[i]) -
+                                      5*func(arrX[i-1], arrY[i-1]) +
+                                      func(arrX[i-2], arrY[i-2]))
+
         arrX.append(round(arrX[i] + h, 6))
         arrY.append(y_cor)
         i += 1
-        if (abs(y_cor - y_ex) > 0.04):
-            h /= 2
     arrX.pop(len(arrX)-1)
     arrY.pop(len(arrY)-1)
     return arrX, arrY
