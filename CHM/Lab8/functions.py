@@ -9,18 +9,24 @@ def RungeKutta(func, y0, a, b, h0):
     h = h0
     while x <= b:
         k1 = func(x0, y0)
-        k2 = func(x0+h/2, y0+h*k1/2)
-        k3 = func(x0+h/2, y0+h*k2/2)
-        k4 = func(x0+h, y0+h*k3)
+        k2 = func(x0 + h / 2, y0 + h * k1 / 2)
+        k3 = func(x0 + h / 2, y0 + h * k2 / 2)
+        k4 = func(x0 + h, y0 + h * k3)
+        t = abs((k2 - k3) / (k1 - k2))
+        while t > 0.04:
+            h /= 2
+            k1 = func(x0, y0)
+            k2 = func(x0+h/2, y0+h*k1/2)
+            k3 = func(x0+h/2, y0+h*k2/2)
+            k4 = func(x0+h, y0+h*k3)
+            t = abs((k2 - k3) / (k1 - k2))
         y = y0 + h/6*(k1+2*k2+2*k3+k4)
         arrX.append(round(x, 6))
         arrY.append(y)
         x += h
         y0 = y
         x0 = x
-        t = abs((k2 - k3) / (k1 - k2))
-        if t > 0.04:
-            h /= 2
+
     return arrX, arrY
 
 def Adams(func, y0, a, b, h0):
